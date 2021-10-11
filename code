@@ -1,0 +1,81 @@
+import networkx as nx
+def graph(path):
+Y = nx.read_edgelist(path=path, create_using=nx.DiGraph(), nodetype=int)
+return Y
+medium_graph = graph(r" C:\Users\kenne\Downloads\medium.tsv" )
+large_graph = graph(r" C:\Users\kenne\Downloads\large.tsv" )
+
+nx.info(large_graph)
+output
+-DiGraph with 27927 nodes and 242928 edges’
+
+len(medium_graph.nodes())
+output-2606
+#Ex 2.2
+len(medium_graph.edges())
+output- 3285
+#ex 2.3
+#indegree outdegree for medium_graph import networkx as nx
+import matplotlib.pyplot as plt
+def plot_degree_dist(medium_graph):
+degrees = [medium_graph.degree(n) for n in medium_graph.nodes()]
+plt.hist(degrees)
+plt.show()
+plot_degree_dist(nx.gnp_random_graph(100, 0.5, directed=True))
+
+#largest weakly connected mediun_graph
+l = max(nx.weakly_connected_components(medium_graph), key=len)
+print(len(l))
+#2.4 medium largest weakly connect #NODES EDEGES
+S = medium_graph.subgraph(l)
+print(list(nx.edges(S)))
+print(list(nx.nodes(S)))
+#2.4.3
+#largest strongly component medium graph
+m = max(nx.strongly_connected_components(medium_graph), key=len)
+print(len(m))
+print(m)
+#2.4 medium strongly connected
+#NODES #EDGES
+S = medium_graph.subgraph(m)
+print(list(nx.edges(S)))
+print(list(nx.nodes(S)))
+#2.4 large graph strongly
+G = nx.cycle_graph(5, create_using=nx.DiGraph())
+nx.add_cycle(G, large_graph)
+4
+[
+len(c)
+for c in sorted(nx.strongly_connected_components(medium_graph), key=len, reverse=True)
+]
+#2.4 large graph strongly
+r = max(nx.strongly_connected_components(large_graph), key=len)
+print(len(r))
+#2.4 large graph stronglym
+#NODES EDGES
+S = large_graph.subgraph(r)
+print(list(nx.edges(S)))
+print(list(nx.nodes(S))
+#2.4
+w = max(nx.weakly_connected_components(large_graph), key=len)
+print(len(w))
+#2.4 NODES EDGES LARGE GRAPH WEAKLY CONNEC
+S = large_graph.subgraph(w)
+print(list(nx.edges(S)))
+print(list(nx.nodes(S)))
+#2.5
+print(nx.average_clustering(medium_graph))
+print(nx.average_clustering(large_graph))
+#2.6 #distance distribution
+medium graph
+import matplotlib.pyplot as plt
+path = nx.all_pairs_shortest_path_length(medium_graph)
+dpath = {x[0]:x[1] for x in path}
+plt.hist(dpath)
+plt.show()
+5
+#2.6
+p= nx.all_pairs_shortest_path_length(large_graph)
+d = {x[0]:x[1] for x in path}
+plt.hist(d)
+plt.show()
